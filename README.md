@@ -7,7 +7,7 @@ A Simple, quick and easy to use composer package for import posts from Medium.co
 Installation:
 
 ```bash
-composer install anarcociclista/mediumfeed
+composer require anarcociclista/mediumfeed
 ```
 
 
