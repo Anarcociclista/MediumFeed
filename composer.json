@@ -4,7 +4,7 @@
     "version": "1.0.0",
     "type": "library",
     "keywords": ["feed", "rss", "medium.com"],
-    "homepage": "http://jolicode.com",
+    "homepage": "https://github.com/Anarcociclista/MediumFeed",
     "require": {
         "dg/rss-php": "^1.2"
     },
