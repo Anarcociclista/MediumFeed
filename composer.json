@@ -1,0 +1,24 @@
+{
+    "name": "anarcociclista/mediumfeed",
+    "description": "Reads Medium.com feeds, with a quick and minimal configuration. It supports timezones",
+    "version": "1.0.0",
+    "type": "library",
+    "keywords": ["feed", "rss", "medium.com"],
+    "homepage": "http://jolicode.com",
+    "require": {
+        "dg/rss-php": "^1.2"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Enrico Pascucci",
+            "email": "enrico.pascucci@gmail.com"
+        }
+    ],
+    "autoload" : {
+        "psr-4" : {
+            "Anarcociclista\\feeds\\": "src"
+        }
+    },
+    "minimum-stability" : "stable"
+}
