@@ -7,7 +7,8 @@ $feed = new MediumFeed(
 	'https://medium.com/feed/@mauro.peroni',
 	[
 		"limit" => 5,
-		"timezone" => "Europe/Rome"
+		"timezone" => "Europe/Rome",
+		"charset" => "utf-8"
 	]);
 
 foreach($feed as $v) {

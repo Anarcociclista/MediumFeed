@@ -18,7 +18,7 @@ class MediumFeed extends \SplQueue {
 	/**
 	 *  
 	 * @param   $url the url of the feed
-	 * @param   $config the array containing the configuration parameters: "limit", "timezone", "dateformat"
+	 * @param   $config the array containing the configuration parameters: "limit", "timezone", "dateformat", "encoding"
 	 */
 	public function __construct($url, $config = []){
 		
@@ -45,18 +45,24 @@ class MediumFeed extends \SplQueue {
 	protected function parseDescription($item){
 
 		$post = new \stdClass();
-		$post->title = trim($item->title);
+		$post->title = $this->encode($item->title, $this->config['charset']);
 		
 		$date = new \DateTime($item->pubDate);
 		$date->setTimezone(new \DateTimezone($this->config['timezone']));
 		$post->time = $date->format($this->config['dateformat']);
 		
-		$post->link = $item->link;
+		$post->link = $this->encode($item->link, $this->config['charset']);
 		$dom = new \DOMDocument();
-		$dom->loadHTML($item->description);
+		$dom->loadHTML($this->encode($item->description, $this->config['charset']));
 
-		$post->imgSrc = $dom->documentElement->getElementsByTagName("img")->item(0)->getAttribute("src");
-		$post->abstract = $dom->documentElement->getElementsByTagName("p")->item(1)->textContent;
+		$post->imgSrc = $this->encode(
+			$dom->documentElement->getElementsByTagName("img")->item(0)->getAttribute("src"),
+			$this->config['charset']
+		);
+		$post->abstract = $this->encode(
+			$dom->documentElement->getElementsByTagName("p")->item(1)->textContent,
+			$this->config['charset']
+		);
 		
 		return $post;
 	}
@@ -71,7 +77,16 @@ class MediumFeed extends \SplQueue {
 			"limit" => NULL,
 			"timezone" => "Europe/London", //http://php.net/manual/en/timezones.php
 			"dateformat" => "Y-m-d H:i", // http://php.net/manual/it/function.date.php
+			"charset" => "" // ovverride the utf-8 encoding
 		];
 		$this->config = array_merge($default, $params);
+	}
+
+	protected function encode($str, $charset = '') {
+		if (($charset) && ('utf-8' !== strtolower($charset))) {
+			return mb_convert_encoding(trim($str), $charset);
+		} else {
+			return trim($str);
+		}
 	}
 }
