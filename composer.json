@@ -1,7 +1,7 @@
 {
     "name": "anarcociclista/mediumfeed",
     "description": "Reads Medium.com feeds, with a quick and minimal configuration. It supports timezones",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "type": "library",
     "keywords": ["feed", "rss", "medium.com"],
     "homepage": "https://github.com/Anarcociclista/MediumFeed",
